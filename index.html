@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRUTSI BRASIL - Agronegócio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+        }
+        header {
+            background-color: #0288D1; /* Azul */
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .site-title {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+        }
+        nav {
+            background-color: #0288D1;
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #F57C00;
+            color: white;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+            min-height: 200px;
+        }
+        .sector-title {
+            background-color: #0288D1;
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .sector-btn {
+            background-color: #F57C00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            border: none;
+        }
+        .sector-btn:hover {
+            background-color: #D35400;
+        }
+        .image-container {
+            display: none;
+            margin-top: 10px;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+        footer {
+            background-color: #0288D1;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="frutsibrasil.png" alt="Logo FRUTSI BRASIL">
+    </div>
+    <div class="site-title">FRUTSI BRASIL</div>
+</header>
+
+<nav>
+    <a href="#UGB1">UGB CONTROLADORIA</a>
+    <a href="#UGB2">UGB COMERCIAL</a>
+    <a href="#UGB3">UGB COMPRAS</a>
+    <a href="#UGB4">UGB DEPARTAMENTO PESSOAL</a>
+    <a href="#UGB5">UGB RECURSOS HUMANOS</a>
+    <a href="#UGB6">UGB FINANCEIRO</a>
+    <a href="#UGB7">UGB CONTÁBIL</a>
+    <a href="#UGB8">UGB CUSTOS</a>
+    <a href="#UGB9">UGB TECNOLOGIA DE INFORMAÇÃO</a>
+    <a href="#UGB10">UGB SERVIÇOS DE LIMPEZA</a>
+    <a href="#UGB11">UGB RECEPÇÃO</a>
+    <a href="#UGB12">UGB CANTINA</a>
+</nav>
+
+<!-- Estrutura para os setores -->
+<script>
+    const setores = [
+        { name: "UGB CONTROLADORIA", graphs: ["controladoriajan25.jpg", "controladoriajan26.jpg"] },
+        { name: "UGB COMERCIAL", graphs: ["comercial1.jpg", "comercial2.jpg"] },
+        { name: "UGB COMPRAS", graphs: ["compras1.jpg", "compras2.jpg"] },
+        { name: "UGB DEPARTAMENTO PESSOAL", graphs: ["pessoal1.jpg", "pessoal2.jpg"] },
+        { name: "UGB RECURSOS HUMANOS", graphs: ["rh1.jpg", "rh2.jpg"] },
+        { name: "UGB FINANCEIRO", graphs: ["financeiro1.jpg", "financeiro2.jpg"] },
+        { name: "UGB CONTÁBIL", graphs: ["contabil1.jpg", "contabil2.jpg"] },
+        { name: "UGB CUSTOS", graphs: ["custos1.jpg", "custos2.jpg"] },
+        { name: "UGB TECNOLOGIA DE INFORMAÇÃO", graphs: ["ti1.jpg", "ti2.jpg"] },
+        { name: "UGB SERVIÇOS DE LIMPEZA", graphs: ["limpeza1.jpg", "limpeza2.jpg"] },
+        { name: "UGB RECEPÇÃO", graphs: ["recepcao1.jpg", "recepcao2.jpg"] },
+        { name: "UGB CANTINA", graphs: ["cantina1.jpg", "cantina2.jpg"] }
+    ];
+
+    const container = document.body;
+
+    setores.forEach((setor, index) => {
+        const id = `UGB${index + 1}`;
+
+        const div = document.createElement("div");
+        div.className = "container";
+        div.id = id;
+
+        const graphsHtml = setor.graphs.map((graph, idx) => `
+            <div id="graph${index + 1}${idx + 1}" class="image-container">
+                <img src="${graph}" alt="Gráfico ${setor.name} ${idx + 1}">
+            </div>
+        `).join("");
+
+        div.innerHTML = `
+            <div class="sector-title">${setor.name}</div>
+            <button class="sector-btn" onclick="toggleAllGraphs('UGB${index + 1}')">Acessar Todos os Gráficos</button>
+            ${graphsHtml}
+        `;
+
+        container.appendChild(div);
+    });
+
+    function toggleAllGraphs(sectorId) {
+        const sector = document.getElementById(sectorId);
+        const graphs = sector.getElementsByClassName('image-container');
+        
+        let allVisible = true;
+        for (let i = 0; i < graphs.length; i++) {
+            if (graphs[i].style.display === 'none' || graphs[i].style.display === '') {
+                allVisible = false;
+                break;
+            }
+        }
+
+        for (let i = 0; i < graphs.length; i++) {
+            if (allVisible) {
+                graphs[i].style.display = 'none';
+            } else {
+                graphs[i].style.display = 'block';
+            }
+        }
+    }
+</script>
+
+<footer>
+    <p>&copy; 2025 FRUTSI BRASIL. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
